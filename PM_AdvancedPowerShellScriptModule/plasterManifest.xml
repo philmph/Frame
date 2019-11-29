@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+  schemaVersion="1.1"
+  templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>PM_AdvancedPowerShellScriptModule</name>
+    <id>d4e8f9e6-3dbd-4ee9-9e10-6ead8adc26f0</id>
+    <version>0.0.1</version>
+    <title>PM Advanced PowerShell Script Module</title>
+    <description>Scaffolds the files for a advanced PowerShell script module</description>
+    <author>Philipp Maier</author>
+    <tags>powershell, pwsh</tags>
+  </metadata>
+
+  <parameters>
+    <parameter name="Author" type="text" prompt="Author name"/>
+    <parameter name="Email" type="text" prompt="Author email"/>
+    <parameter name="ModuleName" type="text" prompt="Name of your module"/>
+    <parameter name="Version" type="text" prompt="Initial module version" default="0.0.1"/>
+    <parameter name="VSCode" type="choice" prompt="Using VS Code as editor" default="0" store="text">
+      <choice label="&amp;Yes"
+        help="Generate ./.vscode/ including basic VS Code settings"
+        value="True"/>
+      <choice label="&amp;No"
+        help=""
+        value="False"/>
+    </parameter>
+    <parameter name="Tests" type="choice" prompt="Include Pester tests" default="1" store="text">
+      <choice label="&amp;Yes"
+        help="Generate ./Tests/ including basic tests for '${PLASTER_PARAM_ModuleName}'"
+        value="True"/>
+      <choice label="&amp;No"
+        help=""
+        value="False"/>
+    </parameter>
+    <parameter name="Builds" type="choice" prompt="Include InvokeBuild builds" default="1" store="text">
+      <choice label="&amp;Yes"
+        help="Generate ./Builds/ including basic builds for '${PLASTER_PARAM_ModuleName}'"
+        value="True"/>
+      <choice label="&amp;No"
+        help=""
+        value="False"/>
+    </parameter>
+  </parameters>
+  
+  <content>
+
+  </content>
+</plasterManifest>
