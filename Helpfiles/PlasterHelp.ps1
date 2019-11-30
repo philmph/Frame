@@ -108,9 +108,9 @@ function Invoke-PMPlaster
         [string]$ModuleDescription,
 
         [version]$ModuleVersion = '0.0.1',
-        [switch]$NoVSCode,
-        [switch]$NoTests,
-        [switch]$NoBuilds
+        [switch]$VSCode,
+        [switch]$Tests,
+        [switch]$Builds
     )
     
     begin {
@@ -130,9 +130,9 @@ function Invoke-PMPlaster
             ModuleName = $ModuleName
             ModuleDescription = $ModuleDescription
             ModuleVersion = $ModuleVersion
-            VSCode = -not $NoVSCode
-            Tests = -not $NoTests
-            Builds = -not $NoBuilds
+            VSCode = -not $VSCode
+            Tests = -not $Tests
+            Builds = -not $Builds
         }
 
         Write-Verbose ([PSCustomObject]$InvokePlasterArgs)
