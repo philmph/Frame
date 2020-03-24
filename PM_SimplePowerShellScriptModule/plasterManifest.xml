@@ -3,11 +3,11 @@
   schemaVersion="1.1"
   templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
   <metadata>
-    <name>PM_AdvancedPowerShellScriptModule</name>
-    <id>d4e8f9e6-3dbd-4ee9-9e10-6ead8adc26f0</id>
+    <name>PM_SimplePowerShellScriptModule</name>
+    <id>7f27d057-b446-4ab6-b67f-8a43af669328</id>
     <version>0.0.1</version>
-    <title>PM Advanced PowerShell Script Module</title>
-    <description>Scaffolds the files for a advanced PowerShell script module</description>
+    <title>PM Simple PowerShell Script Module</title>
+    <description>Scaffolds the files for a simple PowerShell script module</description>
     <author>Philipp Maier</author>
     <tags>powershell, pwsh</tags>
   </metadata>
