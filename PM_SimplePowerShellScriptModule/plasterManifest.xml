@@ -14,29 +14,13 @@
 
   <parameters>
     <parameter name="AuthorName" type="text" prompt="Author name"/>
-    <parameter name="AuthorEmail" type="text" prompt="Author email"/>
+    <parameter name="AuthorCompany" type="text" prompt="Author company"/>
     <parameter name="ModuleName" type="text" prompt="Name of your module"/>
-    <parameter name="ModuleDescription" type="text" prompt="Name of your module"/>
+    <parameter name="ModuleDescription" type="text" prompt="Description of your module"/>
     <parameter name="ModuleVersion" type="text" prompt="Initial module version" default="0.0.1"/>
-    <parameter name="VSCode" type="choice" prompt="Using VS Code as editor" default="0" store="text">
+    <parameter name="VSCode" type="choice" prompt="Use VS Code as editor" default="0" store="text">
       <choice label="&amp;True"
-        help="Generate ./.vscode/ including basic VS Code settings"
-        value="True"/>
-      <choice label="&amp;False"
-        help=""
-        value="False"/>
-    </parameter>
-    <parameter name="Tests" type="choice" prompt="Include Pester tests" default="1" store="text">
-      <choice label="&amp;True"
-        help="Generate ./Tests/ including basic tests for '${PLASTER_PARAM_ModuleName}'"
-        value="True"/>
-      <choice label="&amp;False"
-        help=""
-        value="False"/>
-    </parameter>
-    <parameter name="Builds" type="choice" prompt="Include InvokeBuild builds" default="1" store="text">
-      <choice label="&amp;True"
-        help="Generate ./Builds/ including basic builds for '${PLASTER_PARAM_ModuleName}'"
+        help="Include basic VS Code settings"
         value="True"/>
       <choice label="&amp;False"
         help=""
@@ -45,6 +29,20 @@
   </parameters>
   
   <content>
-  
+    <message>Creating folder structure</message>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\Classes"/>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\Functions\Private"/>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\Functions\Public"/>
+
+    <message>Deploying common files</message>
+    <file condition="$PLASTER_PARAM_VSCode -eq 'True'" source="vscode_settings.json" destination=".vscode\settings.json"/>
+    <file source="pwsh_module.psm1" destination="${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1"/>
+    <newModuleManifest destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+      author='$PLASTER_PARAM_AuthorName'
+      companyName='$PLASTER_PARAM_AuthorCompany'
+      description='$PLASTER_PARAM_ModuleDescription'
+      moduleVersion='$PLASTER_PARAM_ModuleVersion'
+      rootModule='${PLASTER_PARAM_ModuleName}.psm1'
+      encoding='UTF8-NoBOM'/>
   </content>
 </plasterManifest>

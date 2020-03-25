@@ -1,3 +1,0 @@
-# <ModuleName>
-
-Enter description here
