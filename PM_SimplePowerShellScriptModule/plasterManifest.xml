@@ -36,6 +36,7 @@
 
     <message>Deploying common files</message>
     <file condition="$PLASTER_PARAM_VSCode -eq 'True'" source="vscode_settings.json" destination=".vscode\settings.json"/>
+    
     <file source="pwsh_module.psm1" destination="${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1"/>
     <newModuleManifest destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
       author='$PLASTER_PARAM_AuthorName'
