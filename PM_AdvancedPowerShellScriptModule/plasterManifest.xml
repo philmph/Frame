@@ -34,14 +34,16 @@
         help=""
         value="False"/>
     </parameter>
-    <!--<parameter name="Builds" type="choice" prompt="Include PSake builds" default="1" store="text">
+    <!--
+    <parameter name="Builds" type="choice" prompt="Include PSake builds" default="1" store="text">
       <choice label="&amp;True"
         help="Include basic psake build configuration for '${PLASTER_PARAM_ModuleName}'"
         value="True"/>
       <choice label="&amp;False"
         help=""
         value="False"/>
-    </parameter>-->
+    </parameter>
+    -->
   </parameters>
   
   <content>

@@ -18,6 +18,7 @@
     <parameter name="ModuleName" type="text" prompt="Name of your module"/>
     <parameter name="ModuleDescription" type="text" prompt="Description of your module"/>
     <parameter name="ModuleVersion" type="text" prompt="Initial module version" default="0.0.1"/>
+    <!--
     <parameter name="VSCode" type="choice" prompt="Use VS Code as editor" default="0" store="text">
       <choice label="&amp;True"
         help="Include basic VS Code settings"
@@ -26,6 +27,7 @@
         help=""
         value="False"/>
     </parameter>
+    -->
   </parameters>
   
   <content>
@@ -35,7 +37,9 @@
     <file source="" destination="${PLASTER_PARAM_ModuleName}\Functions\Public"/>
 
     <message>Deploying common files</message>
+    <!--
     <file condition="$PLASTER_PARAM_VSCode -eq 'True'" source="vscode_settings.json" destination=".vscode\settings.json"/>
+    -->
     
     <file source="pwsh_module.psm1" destination="${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1"/>
     <newModuleManifest destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
