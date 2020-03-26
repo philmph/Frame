@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+  schemaVersion="1.1"
+  templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>PM_AdvancedPowerShellScriptModule</name>
+    <id>d4e8f9e6-3dbd-4ee9-9e10-6ead8adc26f0</id>
+    <version>0.0.1</version>
+    <title>PM Advanced PowerShell Script Module</title>
+    <description>Scaffolds the files for a advanced PowerShell script module</description>
+    <author>Philipp Maier</author>
+    <tags>powershell, pwsh</tags>
+  </metadata>
+
+  <parameters>
+    <parameter name="AuthorName" type="text" prompt="Author name"/>
+    <parameter name="AuthorCompany" type="text" prompt="Author company"/>
+    <parameter name="ModuleName" type="text" prompt="Name of your module"/>
+    <parameter name="ModuleDescription" type="text" prompt="Description of your module"/>
+    <parameter name="ModuleVersion" type="text" prompt="Initial module version" default="0.0.1"/>
+    <parameter name="VSCode" type="choice" prompt="Using VS Code as editor" default="0" store="text">
+      <choice label="&amp;True"
+        help="Include basic VS Code settings"
+        value="True"/>
+      <choice label="&amp;False"
+        help=""
+        value="False"/>
+    </parameter>
+    <parameter name="Tests" type="choice" prompt="Include Pester tests" default="0" store="text">
+      <choice label="&amp;True"
+        help="Include basic Pester tests for '${PLASTER_PARAM_ModuleName}'"
+        value="True"/>
+      <choice label="&amp;False"
+        help=""
+        value="False"/>
+    </parameter>
+    <!--<parameter name="Builds" type="choice" prompt="Include PSake builds" default="1" store="text">
+      <choice label="&amp;True"
+        help="Include basic psake build configuration for '${PLASTER_PARAM_ModuleName}'"
+        value="True"/>
+      <choice label="&amp;False"
+        help=""
+        value="False"/>
+    </parameter>-->
+  </parameters>
+  
+  <content>
+    <message>Creating folder structure</message>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\Classes"/>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\Functions\Private"/>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\Functions\Public"/>
+
+    <message>Deploying common files</message>
+    <file condition="$PLASTER_PARAM_VSCode -eq 'True'" source="vscode_settings.json" destination=".vscode\settings.json"/>
+    
+    <file source="pwsh_module.psm1" destination="${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1"/>
+    <newModuleManifest destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+      author='$PLASTER_PARAM_AuthorName'
+      companyName='$PLASTER_PARAM_AuthorCompany'
+      description='$PLASTER_PARAM_ModuleDescription'
+      moduleVersion='$PLASTER_PARAM_ModuleVersion'
+      rootModule='${PLASTER_PARAM_ModuleName}.psm1'
+      encoding='UTF8-NoBOM'/>
+
+    <message>Creating advanced environment</message>
+    <file source="" destination="Docs\Images"/>
+    <file source="docs_changelog.md" destination="Docs\CHANGELOG.md"/>
+
+    <requireModule condition="$PLASTER_PARAM_Tests -eq 'True'"
+      name="Pester"
+      minimumVersion="3.4.0"
+      message="PowerShell Module Pester version is to low (&lt;3.4.0) or not installed. Tests will not work in this environment."/>
+    <requireModule condition="$PLASTER_PARAM_Tests -eq 'True'"
+      name="PSScriptAnalyzer"
+      minimumVersion="1.18.3"
+      message="PowerShell Module PSScriptAnalyzer version is to low (&lt;1.18.3) or not installed. Tests will not work in this environment."/>
+    <templateFile condition="$PLASTER_PARAM_Tests -eq 'True'" source="tests_predefined.tests.ps1" destination="Tests\Predefined.Tests.ps1"/>
+
+    <file source=".gitignore" destination=".gitignore"/>
+    <templateFile source="readme.md" destination="README.md"/>
+  </content>
+</plasterManifest>
