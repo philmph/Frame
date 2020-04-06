@@ -4,9 +4,6 @@ Author:				Philipp Maier
 Author Git:			https://github.com/philmph
 Repository:			https://github.com/philmph/Plaster-Template
 
-Filename:			
-Creationdate:		25.03.2020
-
 Notes & Usage:
 -- Functions
 - Create one .ps1 file per function and name it after the function within.
@@ -22,10 +19,10 @@ Automatically generated module wrapper by PM_SimplePowerShellScriptModule.
 
 Write-Verbose -Message "Importing functions for $($MyInvocation.MyCommand.Name)"
 
-$PrivateFunctions = @(Get-ChildItem -Path "$PSScriptRoot\Functions\Private" -Filter "*.ps1")
-$PublicFunctions = @(Get-ChildItem -Path "$PSScriptRoot\Functions\Public" -Filter "*.ps1")
+$Functions = @(Get-ChildItem -Path "$PSScriptRoot\Functions" -Filter "*.ps1" -Recurse)
+$PublicFunctions = $Functions | Where-Object { $_.FullName -match "\\Functions\\Public\\" }
 
-foreach ($Function in ($PrivateFunctions + $PublicFunctions)) {
+foreach ($Function in $Functions) {
     Write-Verbose -Message "Importing function $($Function.BaseName)"
 
     try {
