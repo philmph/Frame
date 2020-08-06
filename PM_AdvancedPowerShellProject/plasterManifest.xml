@@ -96,8 +96,8 @@
     <!-- Deploy Tests -->
     <requireModule condition="$PLASTER_PARAM_Tests -eq 'True'"
       name="Pester"
-      minimumVersion="5.2.0"
-      message="PowerShell Module Pester version is to low (&lt;5.2.0) or not installed. Tests might not work in this environment."/>
+      minimumVersion="5.0.2"
+      message="PowerShell Module Pester version is to low (&lt;5.0.2) or not installed. Tests might not work in this environment."/>
     <requireModule condition="$PLASTER_PARAM_Tests -eq 'True'"
       name="PSScriptAnalyzer"
       minimumVersion="1.19.1"
