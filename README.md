@@ -14,8 +14,8 @@ In this repository i will be storing my plaster templates which i will be using 
 ## Example
 
 ```powershell
-$Path = "D:\Daten\GIT\Private\Plaster-Template\PM_SimplePowerShellScriptModule"
-Invoke-Plaster -TemplatePath $Path -DestinationPath C:\Daten\GIT\Private\MyModule
+PS [7.0.3] C:\Users\maierp> $Path = "C:\Users\maierp\Documents\git\personal\Plaster-Templates"
+PS [7.0.3] C:\Users\maierp> Invoke-Plaster -TemplatePath "$Path\PM_AdvancedPowerShellProject" -DestinationPath "$Path\.testing\"
   ____  _           _
  |  _ \| | __ _ ___| |_ ___ _ __
  | |_) | |/ _` / __| __/ _ \ '__|
@@ -24,20 +24,39 @@ Invoke-Plaster -TemplatePath $Path -DestinationPath C:\Daten\GIT\Private\MyModul
                                             v1.1.3
 ==================================================
 Author name: Philipp Maier
-Author company:
-Name of your module: MyModule
-Description of your module: This is a test module
-Initial module version (0.0.1):
-Destination path: C:\Daten\GIT\Private\MyModule
+Author company: pmaier
+Name of your project: Testproject
+Description of your project: This is a project
+Name of your powershell script module: Testmodule
+Description of your powershell script module: This is a module
+Initial project and powershell script module version (0.0.1):
+Using VS Code as editor
+[T] True  [F] False  [?] Help (default is "T"): t
+Include Pester tests
+[T] True  [F] False  [?] Help (default is "T"): t
+Do you want to add the MIT license
+[T] True  [F] False  [?] Help (default is "T"): t
+Destination path: C:\Users\maierp\Documents\git\personal\Plaster-Templates\.testing\
 Creating folder structure
-   Create MyModule\Classes\
-   Create MyModule\Functions\Private\
-   Create MyModule\Functions\Public\
-   Create MyModule\MyModule.psm1
-   Create MyModule\MyModule.psd1
+   Create Testproject\Testmodule\Classes\
+   Create Testproject\Testmodule\Enums\
+   Create Testproject\Testmodule\Functions\Private\
+   Create Testproject\Testmodule\Functions\Public\
+Deploying common files
+   Create Testproject\Testmodule\Testmodule.psm1
+   Create Testproject\Testmodule\Testmodule.psd1
+Creating advanced environment
+   Create Testproject\.vscode\settings.json
+   Create Testproject\Docs\Images\
+   Create Testproject\Docs\CHANGELOG.md
+  Missing The required module Pester (minimum version: 5.2.0) was not found.
+          PowerShell Module Pester version is to low (<5.2.0) or not installed. Tests might not work in this environment.
+  Missing The required module PSScriptAnalyzer (minimum version: 1.19.1) was not found.
+          PowerShell Module PSScriptAnalyzer version is to low (<1.19.1) or not installed. Tests might not work in this environment.
+   Create Testproject\Tests\PSScriptAnalyzerSettings.ps1
+   Create Testproject\Tests\Predefined.Tests.ps1
+   Create Testproject\LICENSE
+   Create Testproject\.gitignore
+   Create Testproject\README.md
+PS [7.0.3] C:\Users\maierp>
 ```
-
-## Open Tasks
-
-- [ ] Add Help
-- [ ] Enrich Advanced Module

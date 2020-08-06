@@ -9,11 +9,11 @@ Notes & Usage:
 - Create one .ps1 file per function and name it after the function within.
 - Sort internal functions into private and the rest into public.
 
--- Classes
-- Create one .ps1 file per class and name it after the class within.
+-- Classes & Enums
+- Create one .ps1 file per class / enum and name it after the class / enum within.
 - Add the .ps1 file to the module .psd1 at # ScriptsToProcess @().
 
-Automatically generated module wrapper by PM_AdvancedPowerShellScriptModule.
+Automatically generated module wrapper by PM_AdvancedPowerShellProject.
 ############################################################
 #>
 

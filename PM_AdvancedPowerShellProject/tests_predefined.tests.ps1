@@ -1,4 +1,4 @@
-$ModuleName = "TestModule"
+$ModuleName = "<%=$PLASTER_PARAM_ModuleName%>"
 $ModuleRoot = Resolve-Path "$PSScriptRoot\..\$ModuleName"
 $Functions = Get-ChildItem "$ModuleRoot\Functions" -Recurse -Filter *.ps1
 
