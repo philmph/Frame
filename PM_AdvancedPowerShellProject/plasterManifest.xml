@@ -62,6 +62,16 @@
         help=""
         value="False"/>
     </parameter>
+
+    <!-- GNU GPLv3.0 license -->
+    <parameter name="GNUGPLv30License" type="choice" prompt="Do you want to add the GNU GPLv3.0 license" default="0" store="text">
+      <choice label="&amp;True"
+        help="Include GNU GPLv3.0 license"
+        value="True"/>
+      <choice label="&amp;False"
+        help=""
+        value="False"/>
+    </parameter>
   </parameters>
 
   <content>
@@ -105,8 +115,15 @@
     <file condition="$PLASTER_PARAM_Tests -eq 'True'" source="tests_psscriptanalyzersettings.ps1" destination="${PLASTER_PARAM_ProjectName}\Tests\PSScriptAnalyzerSettings.ps1"/>
     <templateFile condition="$PLASTER_PARAM_Tests -eq 'True'" source="tests_predefined.tests.ps1" destination="${PLASTER_PARAM_ProjectName}\Tests\Predefined.Tests.ps1"/>
 
-    <!-- Deploy LICENCE file -->
-    <templateFile condition="$PLASTER_PARAM_MITLicense -eq 'True'" source="license_mit" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
+    <!-- Deploy MIT LICENCE file -->
+    <templateFile condition="$PLASTER_PARAM_MITLicense -eq 'True' -and $PLASTER_PARAM_GNUGPLv30License -eq 'False'" source="license_mit" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
+
+    <!-- Deploy GNU GPLv3.0 LICENCE file -->
+    <file condition="$PLASTER_PARAM_GNUGPLv30License -eq 'True' -and $PLASTER_PARAM_MITLicense -eq 'False'" source="license_gnu-gplv30" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
+
+    <!-- Deploy MIT and GNU GPLv3.0 LICENCE file -->
+    <templateFile condition="$PLASTER_PARAM_MITLicense -eq 'True' -and $PLASTER_PARAM_GNUGPLv30License -eq 'True'" source="license_mit" destination="${PLASTER_PARAM_ProjectName}\LICENSE_MIT"/>
+    <file condition="$PLASTER_PARAM_GNUGPLv30License -eq 'True' -and $PLASTER_PARAM_MITLicense -eq 'True'" source="license_gnu-gplv30" destination="${PLASTER_PARAM_ProjectName}\LICENSE_GNU-GPLv30"/>
 
     <!-- Root dir files -->
     <file source=".gitignore" destination="${PLASTER_PARAM_ProjectName}\.gitignore"/>
