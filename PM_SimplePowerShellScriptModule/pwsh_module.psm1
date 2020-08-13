@@ -2,7 +2,7 @@
 ############################################################
 Author:				Philipp Maier
 Author Git:			https://github.com/philmph
-Repository:			https://github.com/philmph/Plaster-Template
+Repository:			https://github.com/philmph/Plaster-Templates
 
 Notes & Usage:
 -- Functions
