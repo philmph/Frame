@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+  schemaVersion="1.1"
+  templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>Frame_Scriptmodule</name>
+    <id>7f27d057-b446-4ab6-b67f-8a43af669328</id>
+    <version>0.0.2</version>
+    <title>[Frame] PowerShell Script Module</title>
+    <description>Scaffolds the files for a PowerShell script module</description>
+    <author>Philipp Maier</author>
+    <tags>powershell,pwsh,scriptmodule,script,module</tags>
+  </metadata>
+
+  <parameters>
+    <parameter name="AuthorName" type="text" prompt="Author name"/>
+    <parameter name="AuthorCompany" type="text" prompt="Author company"/>
+    <parameter name="ModuleName" type="text" prompt="Name of your powershell script module"/>
+    <parameter name="ModuleDescription" type="text" prompt="Description of your module"/>
+    <parameter name="InitialVersion" type="text" prompt="Initial module version" default="0.0.1"/>
+  </parameters>
+
+  <content>
+    <message>Creating folder structure</message>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\classes"/>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\enums"/>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\functions\private"/>
+    <file source="" destination="${PLASTER_PARAM_ModuleName}\functions\public"/>
+
+    <message>Deploying common files</message>
+    <!-- Generate powershell script module wrapper and manifest -->
+    <file source="pwsh_module.psm1" destination="${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1"/>
+    <newModuleManifest destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+      author='$PLASTER_PARAM_AuthorName'
+      companyName='$PLASTER_PARAM_AuthorCompany'
+      description='$PLASTER_PARAM_ModuleDescription'
+      moduleVersion='$PLASTER_PARAM_InitialVersion'
+      rootModule='${PLASTER_PARAM_ModuleName}.psm1'
+      encoding='UTF8-NoBOM'/>
+  </content>
+</plasterManifest>
