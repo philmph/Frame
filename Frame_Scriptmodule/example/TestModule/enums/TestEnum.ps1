@@ -1,0 +1,4 @@
+enum TestEnum {
+    Cat
+    Dog
+}
