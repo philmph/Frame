@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <plasterManifest
   schemaVersion="1.1"
   templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
@@ -13,8 +13,9 @@
   </metadata>
 
   <parameters>
-    <parameter name="AuthorName" type="text" prompt="Author name"/>
-    <parameter name="AuthorCompany" type="text" prompt="Author company"/>
+    <parameter name="AuthorName" type="user-fullname" prompt="Author name"/>
+    <!-- TODO Necessary? -->
+    <parameter name="AuthorCompany" type="text" prompt="Author company" default=""/>
     <parameter name="ProjectName" type="text" prompt="Name of your project"/>
     <parameter name="ProjectDescription" type="text" prompt="Description of your project"/>
     <parameter name="ModuleName" type="text" prompt="Name of your powershell script module"/>
@@ -55,24 +56,17 @@
     </parameter>
     -->
 
-    <!-- MIT license -->
-    <parameter name="MITLicense" type="choice" prompt="Do you want to add the MIT license" default="0" store="text">
-      <choice label="&amp;True"
-        help="Include MIT license"
-        value="True"/>
-      <choice label="&amp;False"
-        help=""
-        value="False"/>
-    </parameter>
-
-    <!-- GNU GPLv3.0 license -->
-    <parameter name="GNUGPLv30License" type="choice" prompt="Do you want to add the GNU GPLv3.0 license" default="0" store="text">
-      <choice label="&amp;True"
-        help="Include GNU GPLv3.0 license"
-        value="True"/>
-      <choice label="&amp;False"
-        help=""
-        value="False"/>
+    <!-- License -->
+    <parameter name='License' type='choice' prompt='Select the license you want to include' default='0' store='text'>
+      <choice label='&amp;MIT License'
+        help='MIT license will be used.'
+        value='MIT'/>
+      <choice label='&amp;GNU GPLv3.0 License'
+        help='GNU GPLv3.0 license will be used.'
+        value='GNUGPLv30'/>
+      <choice label='&amp;None'
+        help='No license will be used (not recommended).'
+        value='None'/>
     </parameter>
   </parameters>
 
@@ -119,16 +113,9 @@
     <file condition="$PLASTER_PARAM_Tests -eq 'True'" source="tests_psscriptanalyzersettings.ps1" destination="${PLASTER_PARAM_ProjectName}\test\PSScriptAnalyzerSettings.ps1"/>
     -->
 
-    <!-- TODO Rework with choice -->
-    <!-- Deploy MIT LICENCE file -->
-    <templateFile condition="$PLASTER_PARAM_MITLicense -eq 'True' -and $PLASTER_PARAM_GNUGPLv30License -eq 'False'" source="license_mit" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
-
-    <!-- Deploy GNU GPLv3.0 LICENCE file -->
-    <file condition="$PLASTER_PARAM_GNUGPLv30License -eq 'True' -and $PLASTER_PARAM_MITLicense -eq 'False'" source="license_gnu-gplv30" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
-
-    <!-- Deploy MIT and GNU GPLv3.0 LICENCE file -->
-    <templateFile condition="$PLASTER_PARAM_MITLicense -eq 'True' -and $PLASTER_PARAM_GNUGPLv30License -eq 'True'" source="license_mit" destination="${PLASTER_PARAM_ProjectName}\LICENSE_MIT"/>
-    <file condition="$PLASTER_PARAM_GNUGPLv30License -eq 'True' -and $PLASTER_PARAM_MITLicense -eq 'True'" source="license_gnu-gplv30" destination="${PLASTER_PARAM_ProjectName}\LICENSE_GNU-GPLv30"/>
+    <!-- Deploy License -->
+    <templateFile condition="$PLASTER_PARAM_License -eq 'MIT'" source="license_mit" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
+    <file condition="$PLASTER_PARAM_License -eq 'GNUGPLv30'" source="license_gnu-gplv30" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
 
     <!-- Root dir files -->
     <file source=".gitignore" destination="${PLASTER_PARAM_ProjectName}\.gitignore"/>
