@@ -13,7 +13,8 @@
   </metadata>
 
   <parameters>
-    <parameter name="AuthorName" type="text" prompt="Author name"/>
+    <parameter name="AuthorName" type="user-fullname" prompt="Author name"/>
+    <!-- TODO Necessary? -->
     <parameter name="AuthorCompany" type="text" prompt="Author company"/>
     <parameter name="ModuleName" type="text" prompt="Name of your powershell script module"/>
     <parameter name="ModuleDescription" type="text" prompt="Description of your module"/>
