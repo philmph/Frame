@@ -5,7 +5,7 @@
   <metadata>
     <name>Frame_Scriptmodule</name>
     <id>7f27d057-b446-4ab6-b67f-8a43af669328</id>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <title>[Frame] PowerShell Script Module</title>
     <description>Scaffolds the files for a PowerShell script module</description>
     <author>Philipp Maier</author>

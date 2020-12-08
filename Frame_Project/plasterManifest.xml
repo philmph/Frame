@@ -5,7 +5,7 @@
   <metadata>
     <name>Frame_Project</name>
     <id>d4e8f9e6-3dbd-4ee9-9e10-6ead8adc26f0</id>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <title>[Frame] PowerShell Project</title>
     <description>Scaffolds the files for a PowerShell project</description>
     <author>Philipp Maier</author>
