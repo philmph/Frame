@@ -33,7 +33,7 @@
     </parameter>
 
     <!-- Builds -->
-    <!-- TODO This needs to be added (using Invoke-Build)
+    <!-- ? Placeholder - This part is deprecated for now
     <parameter name="Builds" type="choice" prompt="Include Invoke-Build builds" default="1" store="text">
       <choice label="&amp;True"
         help="Include basic Invoke-Build build configuration for '${PLASTER_PARAM_ModuleName}'"
@@ -93,7 +93,7 @@
     <file condition="$PLASTER_PARAM_VSCode -eq 'True'" source="vscode_settings.json" destination="${PLASTER_PARAM_ProjectName}\.vscode\settings.json"/>
 
     <!-- Deploy Builds -->
-    <!-- TODO This needs to be added (using Invoke-Build)
+    <!-- ? Placeholder - This part is deprecated for now
     -->
 
     <!-- Deploy Docs  -->
