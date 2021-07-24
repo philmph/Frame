@@ -45,16 +45,14 @@
     -->
 
     <!-- Tests -->
-    <!-- TODO This needs to be overhauled
     <parameter name="Tests" type="choice" prompt="Include Pester tests" default="0" store="text">
       <choice label="&amp;True"
-        help="Include basic Pester tests for '${PLASTER_PARAM_ModuleName}'"
+        help="Include Pester tests for '${PLASTER_PARAM_ModuleName}'"
         value="True"/>
       <choice label="&amp;False"
         help=""
         value="False"/>
     </parameter>
-    -->
 
     <!-- License -->
     <parameter name='License' type='choice' prompt='Select the license you want to include' default='0' store='text'>
@@ -100,15 +98,16 @@
     <file source="" destination="${PLASTER_PARAM_ProjectName}\docs\images"/>
 
     <!-- Deploy Tests -->
-    <!-- TODO This needs to be overhauled
     <requireModule condition="$PLASTER_PARAM_Tests -eq 'True'"
       name="Pester"
-      minimumVersion="5.0.2"
-      message="PowerShell Module Pester version is to low (&lt;5.0.2) or not installed. Tests might not work in this environment."/>
+      minimumVersion="5.2.2"
+      message="PowerShell Module Pester version is to low (&lt;5.2.2) or not installed. Predefined Tests might not work in this environment."/>
     <requireModule condition="$PLASTER_PARAM_Tests -eq 'True'"
       name="PSScriptAnalyzer"
       minimumVersion="1.19.1"
-      message="PowerShell Module PSScriptAnalyzer version is to low (&lt;1.19.1) or not installed. Tests might not work in this environment."/>
+      message="PowerShell Module PSScriptAnalyzer version is to low (&lt;1.19.1) or not installed. Predefined Tests might not work in this environment."/>
+    <file source="" destination="${PLASTER_PARAM_ProjectName}\tests"/>
+    <!-- TODO Files tests_predefined.tests.ps1 and tests_psscriptanalyzersettings.ps1 need to be updated
     <templateFile condition="$PLASTER_PARAM_Tests -eq 'True'" source="tests_predefined.tests.ps1" destination="${PLASTER_PARAM_ProjectName}\test\Predefined.Tests.ps1"/>
     <file condition="$PLASTER_PARAM_Tests -eq 'True'" source="tests_psscriptanalyzersettings.ps1" destination="${PLASTER_PARAM_ProjectName}\test\PSScriptAnalyzerSettings.ps1"/>
     -->
