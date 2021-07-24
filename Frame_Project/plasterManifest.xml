@@ -14,18 +14,26 @@
 
   <parameters>
     <parameter name="AuthorName" type="user-fullname" prompt="Author name"/>
-    <!-- TODO Necessary? -->
-    <parameter name="AuthorCompany" type="text" prompt="Author company" default=""/>
     <parameter name="ProjectName" type="text" prompt="Name of your project"/>
-    <parameter name="ProjectDescription" type="text" prompt="Description of your project"/>
     <parameter name="ModuleName" type="text" prompt="Name of your powershell script module"/>
     <parameter name="ModuleDescription" type="text" prompt="Description of your powershell script module"/>
     <parameter name="InitialVersion" type="text" prompt="Initial project and powershell script module version" default="0.0.1"/>
 
+    <!-- Company -->
+    <parameter name="IncludeCompany" type="text" prompt="Provide a company name?" default="">
+    <choice label="&amp;True"
+        help="Include company"
+        value="True"/>
+      <choice label="&amp;False"
+        help=""
+        value="False"/>
+    </parameter>
+    <parameter condition="$PLASTER_PARAM_IncludeCompany -eq 'True'" type="text" prompt="Author company" default=""/>
+
     <!-- VS Code settings file -->
-    <parameter name="VSCode" type="choice" prompt="Using VS Code as editor" default="0" store="text">
+    <parameter name="VSCode" type="choice" prompt="Include VS Code settings (using VS Code as editor)?" default="0" store="text">
       <choice label="&amp;True"
-        help="Include basic VS Code settings"
+        help="Include VS Code settings"
         value="True"/>
       <choice label="&amp;False"
         help=""
@@ -34,7 +42,7 @@
 
     <!-- Builds -->
     <!-- ? Placeholder - This part is deprecated for now
-    <parameter name="Builds" type="choice" prompt="Include Invoke-Build builds" default="1" store="text">
+    <parameter name="Builds" type="choice" prompt="Include Invoke-Build builds?" default="1" store="text">
       <choice label="&amp;True"
         help="Include basic Invoke-Build build configuration for '${PLASTER_PARAM_ModuleName}'"
         value="True"/>
@@ -45,7 +53,7 @@
     -->
 
     <!-- Tests -->
-    <parameter name="Tests" type="choice" prompt="Include Pester tests" default="0" store="text">
+    <parameter name="Tests" type="choice" prompt="Include Pester tests?" default="0" store="text">
       <choice label="&amp;True"
         help="Include Pester tests for '${PLASTER_PARAM_ModuleName}'"
         value="True"/>
@@ -53,6 +61,17 @@
         help=""
         value="False"/>
     </parameter>
+
+    <!-- Code of conduct -->
+    <parameter name='IncludeCodeOfConduct' type='choice' prompt='Include Code of Conduct?' default='0' store='text'>
+      <choice label="&amp;True"
+        help="Include Code of Conduct"
+        value="True"/>
+      <choice label="&amp;False"
+        help=""
+        value="False"/>
+    </parameter>
+    <parameter condition="$PLASTER_PARAM_IncludeCodeOfConduct -eq 'True'" name="CodeOfConductEmail" type="text" prompt="Code of Conduct E-Mail" default=""/>
 
     <!-- License -->
     <parameter name='License' type='choice' prompt='Select the license you want to include' default='0' store='text'>
@@ -78,9 +97,19 @@
     <message>Deploying common files</message>
     <!-- Generate powershell script module wrapper and manifest -->
     <file source="pwsh_module.psm1" destination="${PLASTER_PARAM_ProjectName}\src\${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1"/>
-    <newModuleManifest destination='${PLASTER_PARAM_ProjectName}\src\${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+    <newModuleManifest
+      condition="$PLASTER_PARAM_IncludeCompany -eq 'True'"
+      destination='${PLASTER_PARAM_ProjectName}\src\${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
       author='$PLASTER_PARAM_AuthorName'
       companyName='$PLASTER_PARAM_AuthorCompany'
+      description='$PLASTER_PARAM_ModuleDescription'
+      moduleVersion='$PLASTER_PARAM_InitialVersion'
+      rootModule='${PLASTER_PARAM_ModuleName}.psm1'
+      encoding='UTF8-NoBOM'/>
+    <newModuleManifest
+      condition="$PLASTER_PARAM_IncludeCompany -eq 'False'"
+      destination='${PLASTER_PARAM_ProjectName}\src\${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+      author='$PLASTER_PARAM_AuthorName'
       description='$PLASTER_PARAM_ModuleDescription'
       moduleVersion='$PLASTER_PARAM_InitialVersion'
       rootModule='${PLASTER_PARAM_ModuleName}.psm1'
@@ -116,9 +145,12 @@
     <templateFile condition="$PLASTER_PARAM_License -eq 'MIT'" source="license_mit" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
     <file condition="$PLASTER_PARAM_License -eq 'GNUGPLv30'" source="license_gnu-gplv30" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
 
+    <!-- Deploy License -->
+    <templateFile condition="$PLASTER_PARAM_CodeOfConduct -eq 'True'" source="code_of_conduct.md" destination="${PLASTER_PARAM_ProjectName}\CODE_OF_CONDUCT.md"/>
+
     <!-- Root dir files -->
     <file source=".gitignore" destination="${PLASTER_PARAM_ProjectName}\.gitignore"/>
-    <templateFile source="docs_changelog.md" destination="${PLASTER_PARAM_ProjectName}\CHANGELOG.md"/>
+    <templateFile source="changelog.md" destination="${PLASTER_PARAM_ProjectName}\CHANGELOG.md"/>
     <templateFile source="readme.md" destination="${PLASTER_PARAM_ProjectName}\README.md"/>
   </content>
 </plasterManifest>
