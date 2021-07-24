@@ -20,7 +20,7 @@
     <parameter name="InitialVersion" type="text" prompt="Initial project and powershell script module version" default="0.0.1"/>
 
     <!-- Company -->
-    <parameter name="IncludeCompany" type="text" prompt="Provide a company name?" default="">
+    <parameter name="IncludeCompany" type="choice" prompt="Provide a company name?" default="">
     <choice label="&amp;True"
         help="Include company"
         value="True"/>
@@ -28,7 +28,7 @@
         help=""
         value="False"/>
     </parameter>
-    <parameter condition="$PLASTER_PARAM_IncludeCompany -eq 'True'" type="text" prompt="Author company" default=""/>
+    <parameter condition="$PLASTER_PARAM_IncludeCompany -eq 'True'" name="AuthorCompany" type="text" prompt="Author company" default=""/>
 
     <!-- VS Code settings file -->
     <parameter name="VSCode" type="choice" prompt="Include VS Code settings (using VS Code as editor)?" default="0" store="text">
@@ -135,7 +135,7 @@
       name="PSScriptAnalyzer"
       minimumVersion="1.19.1"
       message="PowerShell Module PSScriptAnalyzer version is to low (&lt;1.19.1) or not installed. Predefined Tests might not work in this environment."/>
-    <file source="" destination="${PLASTER_PARAM_ProjectName}\tests"/>
+    <file condition="$PLASTER_PARAM_Tests -eq 'True'" source="" destination="${PLASTER_PARAM_ProjectName}\tests"/>
     <!-- TODO Files tests_predefined.tests.ps1 and tests_psscriptanalyzersettings.ps1 need to be updated
     <templateFile condition="$PLASTER_PARAM_Tests -eq 'True'" source="tests_predefined.tests.ps1" destination="${PLASTER_PARAM_ProjectName}\test\Predefined.Tests.ps1"/>
     <file condition="$PLASTER_PARAM_Tests -eq 'True'" source="tests_psscriptanalyzersettings.ps1" destination="${PLASTER_PARAM_ProjectName}\test\PSScriptAnalyzerSettings.ps1"/>
@@ -145,8 +145,8 @@
     <templateFile condition="$PLASTER_PARAM_License -eq 'MIT'" source="license_mit" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
     <file condition="$PLASTER_PARAM_License -eq 'GNUGPLv30'" source="license_gnu-gplv30" destination="${PLASTER_PARAM_ProjectName}\LICENSE"/>
 
-    <!-- Deploy License -->
-    <templateFile condition="$PLASTER_PARAM_CodeOfConduct -eq 'True'" source="code_of_conduct.md" destination="${PLASTER_PARAM_ProjectName}\CODE_OF_CONDUCT.md"/>
+    <!-- Deploy Code of Conduct -->
+    <templateFile condition="$PLASTER_PARAM_IncludeCodeOfConduct -eq 'True'" source="code_of_conduct.md" destination="${PLASTER_PARAM_ProjectName}\CODE_OF_CONDUCT.md"/>
 
     <!-- Root dir files -->
     <file source=".gitignore" destination="${PLASTER_PARAM_ProjectName}\.gitignore"/>
