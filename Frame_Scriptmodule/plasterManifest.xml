@@ -14,12 +14,21 @@
 
   <parameters>
     <parameter name="AuthorName" type="user-fullname" prompt="Author name"/>
-    <!-- TODO Necessary? -->
-    <parameter name="AuthorCompany" type="text" prompt="Author company"/>
     <parameter name="ModuleName" type="text" prompt="Name of your powershell script module"/>
     <parameter name="ModuleDescription" type="text" prompt="Description of your module"/>
     <parameter name="InitialVersion" type="text" prompt="Initial module version" default="0.0.1"/>
   </parameters>
+
+  <!-- Company -->
+  <parameter name="IncludeCompany" type="text" prompt="Provide a company name?" default="">
+  <choice label="&amp;True"
+      help="Include company"
+      value="True"/>
+    <choice label="&amp;False"
+      help=""
+      value="False"/>
+  </parameter>
+  <parameter condition="$PLASTER_PARAM_IncludeCompany -eq 'True'" type="text" prompt="Author company" default=""/>
 
   <content>
     <message>Creating folder structure</message>
@@ -31,9 +40,19 @@
     <message>Deploying common files</message>
     <!-- Generate powershell script module wrapper and manifest -->
     <file source="pwsh_module.psm1" destination="${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1"/>
-    <newModuleManifest destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+    <newModuleManifest
+      condition="$PLASTER_PARAM_IncludeCompany -eq 'True'"
+      destination='${PLASTER_PARAM_ProjectName}\src\${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
       author='$PLASTER_PARAM_AuthorName'
       companyName='$PLASTER_PARAM_AuthorCompany'
+      description='$PLASTER_PARAM_ModuleDescription'
+      moduleVersion='$PLASTER_PARAM_InitialVersion'
+      rootModule='${PLASTER_PARAM_ModuleName}.psm1'
+      encoding='UTF8-NoBOM'/>
+    <newModuleManifest
+      condition="$PLASTER_PARAM_IncludeCompany -eq 'False'"
+      destination='${PLASTER_PARAM_ProjectName}\src\${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+      author='$PLASTER_PARAM_AuthorName'
       description='$PLASTER_PARAM_ModuleDescription'
       moduleVersion='$PLASTER_PARAM_InitialVersion'
       rootModule='${PLASTER_PARAM_ModuleName}.psm1'
