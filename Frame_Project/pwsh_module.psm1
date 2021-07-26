@@ -19,14 +19,13 @@ Automatically generated module wrapper by Frame_Project.
 ################################################################################
 #>
 
-$Functions = @(Get-ChildItem -Path "$PSScriptRoot\functions" -Filter "*.ps1" -Recurse)
-$PublicFunctions = $Functions | Where-Object { $_.FullName -match "\\functions\\public\\" }
+$Functions = @(Get-ChildItem -Path "$PSScriptRoot\functions" -Filter '*.ps1' -Recurse)
+$PublicFunctions = $Functions | Where-Object { $_.FullName -match '\\functions\\public\\' }
 
 foreach ($Function in $Functions) {
     try {
         . $Function.FullName
-    }
-    catch {
+    } catch {
         Write-Error -ErrorRecord $_ -ErrorAction Stop
     }
 }
