@@ -17,18 +17,18 @@
     <parameter name="ModuleName" type="text" prompt="Name of your powershell script module"/>
     <parameter name="ModuleDescription" type="text" prompt="Description of your module"/>
     <parameter name="InitialVersion" type="text" prompt="Initial module version" default="0.0.1"/>
-  </parameters>
 
-  <!-- Company -->
-  <parameter name="IncludeCompany" type="text" prompt="Provide a company name?" default="">
-  <choice label="&amp;True"
-      help="Include company"
-      value="True"/>
-    <choice label="&amp;False"
-      help=""
-      value="False"/>
-  </parameter>
-  <parameter condition="$PLASTER_PARAM_IncludeCompany -eq 'True'" type="text" prompt="Author company" default=""/>
+    <!-- Company -->
+    <parameter name="IncludeCompany" type="choice" prompt="Provide a company name?" default="">
+    <choice label="&amp;True"
+        help="Include company"
+        value="True"/>
+      <choice label="&amp;False"
+        help=""
+        value="False"/>
+    </parameter>
+    <parameter condition="$PLASTER_PARAM_IncludeCompany -eq 'True'" name="AuthorCompany" type="text" prompt="Author company" default=""/>
+  </parameters>
 
   <content>
     <message>Creating folder structure</message>
