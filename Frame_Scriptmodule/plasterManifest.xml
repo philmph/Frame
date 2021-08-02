@@ -42,7 +42,7 @@
     <file source="pwsh_module.psm1" destination="${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1"/>
     <newModuleManifest
       condition="$PLASTER_PARAM_IncludeCompany -eq 'True'"
-      destination='${PLASTER_PARAM_ProjectName}\src\${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+      destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
       author='$PLASTER_PARAM_AuthorName'
       companyName='$PLASTER_PARAM_AuthorCompany'
       description='$PLASTER_PARAM_ModuleDescription'
@@ -51,7 +51,7 @@
       encoding='UTF8-NoBOM'/>
     <newModuleManifest
       condition="$PLASTER_PARAM_IncludeCompany -eq 'False'"
-      destination='${PLASTER_PARAM_ProjectName}\src\${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+      destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
       author='$PLASTER_PARAM_AuthorName'
       description='$PLASTER_PARAM_ModuleDescription'
       moduleVersion='$PLASTER_PARAM_InitialVersion'
