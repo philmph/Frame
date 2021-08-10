@@ -28,7 +28,7 @@ Please make sure to update tests as appropriate.
 
 ## Authors and acknowledgment
 
-- Philipp Maier
+- Philipp Maier [@philmph](https://github.com/philmph)
 
 ## License
 
